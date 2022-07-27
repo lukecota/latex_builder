@@ -1,0 +1,15 @@
+Once background light and stars have been removed the data is binned and formatted for input into the IPS tomography. The binning of the data consists of first splitting the data into a grid of $\ell \times \ell$ squares. After splitting the data into a grid, the mean of the brightness, right ascension, and declination is computed. It will be these mean values that will represent each bin. The values of $\ell$ will depend on how much of the sky each bin will cover. Table \ref{tbl_bin_dimensions} shows the dimensions of the bins currently in use for each camera.
+\begin{table}[h]
+  \center
+  \begin{tabular}{|c|c|c|}
+    \hline 
+    \rule[-1ex]{0pt}{2.5ex} Device & $\ell$ & Degrees per bin  \\ 
+    \hline 
+    \rule[-1ex]{0pt}{2.5ex} Camera 1 & $51$ & $1 \times 1$  \\ 
+    \hline 
+    \rule[-1ex]{0pt}{2.5ex} Camera 2 & $14$  & $1 \times 1$ \\ 
+    \hline 
+  \end{tabular} 
+  \caption{Dimensions for binning for each camera, and the resulting resolution.}
+  \label{tbl_bin_dimensions}
+\end{table}

@@ -1,0 +1,95 @@
+\documentclass[12pt, oneside]{article}
+\usepackage{graphicx}
+\usepackage{setspace,amssymb,latexsym,amsmath,amscd,epsfig,amsthm,wasysym}
+\usepackage{multirow}
+\usepackage[nohead, margin=0.5in]{geometry}
+\usepackage{enumitem}
+\usepackage{subcaption}
+\usepackage[titletoc]{appendix}
+%\geometry{left=0.5in,right=0.5in,top=0.3in,bottom=0.5in} 
+
+\usepackage{tikz}
+\usetikzlibrary {positioning}
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{math} %needed tikz library
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.11}
+\usetikzlibrary{datavisualization}
+\pagestyle{empty}
+
+% hyperlink stuff
+\usepackage{hyperref}
+\hypersetup{
+  colorlinks = true,
+  linkcolor = black,
+  urlcolor = black
+}
+\urlstyle{same}
+
+% Some macros
+\newcommand{\ket}[1]{\vert{#1}\rangle}
+\newcommand{\bra}[1]{\langle{#1}\vert}
+\newcommand{\braket}[2]{\langle{#1}\vert{#2}\rangle}
+\newcommand{\matelm}[3]{\langle{#1}\vert{#2}\vert{#3}\rangle}
+\newcommand{\subscript}[1]{\ensuremath{_{\textrm{#1}}}}
+\newcommand{\superscript}[1]{\ensuremath{^{\textrm{#1}}}}
+\newcommand{\sumation}[3]{\underset{#1}{\overset{#2}{\sum}}#3}
+\newcommand{\fullsum}[3]{\underset{#1=#2}{\overset{#3}{\sum}}}
+\newcommand{\expectation}[1]{\langle{#1}\rangle}
+
+\title{Notes On Star Removal In Stereo HI Data}
+\begin{document}
+  \maketitle
+  \newpage
+  \tableofcontents
+  \newpage
+  
+  \section{Introduction}
+    \input{introduction}
+  
+  \section{Data Extraction}
+    \input{data_extraction}
+    
+  \section{Star Mitigation}
+    \input{star_mitigation}
+    
+  \section{Data Binning}
+    \input{data_binning}
+  
+  \section{Temporary}
+    \input{outlier_removal}
+    
+%  \begin{appendices}
+%    \input{ssw_discussion_appendix}
+%    \input{parameters_comparasons_appendix}
+%  \end{appendices}
+\end{document}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,13 @@
+\subsection{Median Absolute Deviation of the Median}
+The \textbf{median absolute deviation from the median $\left(\hat{\sigma}\right)$} is a way of determining the spread of a dataset from its central value. For this analysis the central value will be represented by the median $\left(\overset{\sim}{X}\right)$. The median absolute deviation from the median is a robust statistical method that is resistant to the effects of outlier data points. In this work the $\hat{\sigma}$ is used as a replacement for the standard deviation $\left(\sigma\right)$ of a dataset.
+
+Given a dataset $X = \{x_1, x_2,\dots,x_{m^2}\}$, the median is first calculated 
+\begin{equation}
+  \overset{\sim}{X} = median(X)
+  \label{eqn:median}
+\end{equation}
+Once the median has been determined the $\hat{\sigma}$ can be calculated for $X$
+\begin{equation}
+  \hat{\sigma} = median \left( | x_i - \overset{\sim}{X} | \right),\ for\ i=1,2,\dots,m^2
+\end{equation}
+Now $\hat{\sigma}$ and $\overset{\sim}{X}$ are used in the same manner as the standard deviation and mean to determine outliers. That is only values in the range from Inequality \ref{eqn:accept_range} are accepted. Values outside the range in Inequality \ref{eqn:accept_range} are replaced by $\overset{\sim}{X}$.
