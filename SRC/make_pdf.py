@@ -1,7 +1,11 @@
 
+import subprocess
+import sys
 import os
 
-from os.path import basename, isfile
+from get_output_name import get_output_name
+from pdflatex        import PDFLaTeX as pdftex
+from os.path         import basename, isfile
 
 """
 Created on Wed Jul27 16:43:57 2022
@@ -20,7 +24,8 @@ OUTPUTS:
     NONE
 
 DEPENDENCIES:
-    NONE
+    You will need to use the python package pdflatex. If you don't have it installed,
+    use the command "pip install pdflatex" to install it.
 
 NOTES:
     Some notes here
@@ -28,7 +33,7 @@ NOTES:
     VARIABLES (Important non IO variables):
         NONE
 """
-def make_pdf(src, hflag, dst):
+def make_pdf(src, hflag):
 
     # Checking that the file in "src" exists
     if (not isfile(src)):
@@ -36,26 +41,14 @@ def make_pdf(src, hflag, dst):
         print(msg)
         return
 
-    # Setting up to build output file name
-    if (dst == None):
-        dst_dir = src
+    pdf_obj = pdftex.from_texfile(src)
+    pdf_file, log, cmpld_proc = pdf_obj.create_pdf(keep_pdf_file=False, keep_log_file=True)
 
-    else:
-        dst_dir = dst
-
-    # Getting path to folder where pdf file will be placed
-    plist = dst_dir.split(os.path.sep)
-
-    # Getting name of output file without extension
-    oname = basename(dst_dir).split('.')[0]
-
-    # Building fully quilified ouput file name
-    dir_path = ''
-    for indx in range(len(plist)-1):
-        dir_path += f'{plist[indx]}/'
-
-    oname = f'{dir_path}{oname}.pdf'
-    print(f'** Writing to file "{oname}"')
-
+    if (cmpld_proc.returncode != 0):
+        last_dot = src.rindex('.')
+        log_name = f'{src[:last_dot]}.log'
+        msg  = f'\n** ERROR: There was a problem compiling the given tex documents. See'
+        msg += f' "{log_name}" for details'
+        print(msg)
 
     return
