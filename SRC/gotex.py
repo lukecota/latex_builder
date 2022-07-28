@@ -2,6 +2,8 @@
 
 import argparse
 
+from make_pdf import make_pdf
+
 """
 Created on Wed Jul27 16:30:19 2022
 
@@ -26,19 +28,28 @@ NOTES:
         NONE
 """
 def main():
-    descript = '''Application description here'''
-    arg_help = '''Description of argument here'''
-    opt_help = '''Description of option here'''
-    opno_help = '''Description of option with no arguments'''
+    descript = '''Build Latex files into a PDF'''
+    src_help = '''Path to main Latex file'''
+    bem_help = '''Build a Beamer project'''
+    hyp_help = '''Use this option to add hyperlinks to your document'''
+    out_help = '''Path to output pdf file'''
 
     parser = argparse.ArgumentParser(description = descript)
-    parser.add_argument('arg', help = arg_help)
-    parser.add_argument('-o', '--opt', help = opt_help, metavar = 'opt_display_name')
-    parser.add_argument('-n', '--no', help = opno_help, action = 'store_true',
+    parser.add_argument('SOURCE', help = src_help)
+    parser.add_argument('-b', '--beamer', help = bem_help, action = 'store_true',
                         default = False)
+    parser.add_argument('-H', '--hyperlink', help = hyp_help, action = 'store_true',
+                        default = False)
+    parser.add_argument('-o', '--output', help = out_help)
 
     # Create list of keys to the args dictionary
     args = parser.parse_args().__dict__
+
+    if (not args['beamer']):
+        make_pdf(args['SOURCE'], args['hyperlink'], args['output'])
+
+    else:
+        print(f'NOT YET IMPELMENTED')
 
     return
 
