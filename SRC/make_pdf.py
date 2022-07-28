@@ -42,7 +42,7 @@ def make_pdf(src, hflag):
         return
 
     pdf_obj = pdftex.from_texfile(src)
-    pdf_file, log, cmpld_proc = pdf_obj.create_pdf(keep_pdf_file=False, keep_log_file=True)
+    pdf_file, log, cmpld_proc = pdf_obj.create_pdf(keep_pdf_file=True, keep_log_file=True)
 
     if (cmpld_proc.returncode != 0):
         last_dot = src.rindex('.')
