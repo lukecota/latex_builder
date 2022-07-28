@@ -4,7 +4,6 @@ import sys
 import os
 
 from get_output_name import get_output_name
-from pdflatex        import PDFLaTeX as pdftex
 from os.path         import basename, isfile
 
 """
@@ -24,8 +23,7 @@ OUTPUTS:
     NONE
 
 DEPENDENCIES:
-    You will need to use the python package pdflatex. If you don't have it installed,
-    use the command "pip install pdflatex" to install it.
+    NONE
 
 NOTES:
     Some notes here
@@ -33,7 +31,7 @@ NOTES:
     VARIABLES (Important non IO variables):
         NONE
 """
-def make_pdf(src, hflag):
+def make_pdf(src, hflag, dst):
 
     # Checking that the file in "src" exists
     if (not isfile(src)):
@@ -41,14 +39,22 @@ def make_pdf(src, hflag):
         print(msg)
         return
 
-    pdf_obj = pdftex.from_texfile(src)
-    pdf_file, log, cmpld_proc = pdf_obj.create_pdf(keep_pdf_file=True, keep_log_file=True)
+    # Getting ouput name
+    oname = get_output_name(src, dst)
+    print(f'** Writing to file "{oname}"')
 
-    if (cmpld_proc.returncode != 0):
-        last_dot = src.rindex('.')
-        log_name = f'{src[:last_dot]}.log'
-        msg  = f'\n** ERROR: There was a problem compiling the given tex documents. See'
-        msg += f' "{log_name}" for details'
+    # Creating pdf file
+    result = subprocess.run(['pdflatex', '-halt-on-error', '-jobname', oname, src],
+                            capture_output=True, text=True)
+
+    if (result.returncode != 0):
+        msg  = f'** Error: There was an error processing the Latex files. See {oname}.log'
+        msg += f' for more details'
         print(msg)
+
+    # Need to run the pdflatex command again for building thing like table of contents
+    # and appendecies
+    result = subprocess.run(['pdflatex', '-halt-on-error', '-jobname', oname, src],
+                            capture_output=True, text=True)
 
     return

@@ -20,8 +20,7 @@ OUTPUTS:
     NONE
 
 DEPENDENCIES:
-    You will need to use the python package pdflatex. If you don't have it installed,
-    use the command "pip install pdflatex" to install it.
+    NONE
 
 NOTES:
     Some notes here
@@ -35,6 +34,7 @@ def main():
     bem_help = '''Build a Beamer project. ** NOT YET IMPLIMENTED **'''
     hyp_help = '''Use this option to add hyperlinks to your document.
                   ** NOT YET IMPLIMENTED **'''
+    out_help = '''User supplied name for output'''
     cln_help = '''Clean up all unused tiles created by the pdflatex command. When this
                   option is used the SOURCE argument should be the path to the folder
                   which is to be cleand'''
@@ -47,6 +47,7 @@ def main():
                         default = False)
     parser.add_argument('-H', '--hyperlink', help = hyp_help, action = 'store_true',
                         default = False)
+    parser.add_argument('-o', '--output', help = out_help)
 
     # Create list of keys to the args dictionary
     args = parser.parse_args().__dict__
@@ -56,7 +57,7 @@ def main():
         return
 
     if (not args['beamer']):
-        make_pdf(args['SOURCE'], args['hyperlink'])
+        make_pdf(args['SOURCE'], args['hyperlink'], args['output'])
 
     else:
         print(f'NOT YET IMPELMENTED')

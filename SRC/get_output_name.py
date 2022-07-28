@@ -48,6 +48,6 @@ def get_output_name(src, dst):
     for indx in range(len(plist)-1):
         dir_path += f'{plist[indx]}/'
 
-    oname = f'{dir_path}{oname}.pdf'
+    oname = f'{dir_path}{oname}'
 
     return oname
